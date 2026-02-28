@@ -3,3 +3,4 @@ res://scenes/main/main.gd
 res://scenes/main/main.tscn
 res://scenes/main/control_pausa.gd
 res://scenes/hud/hud.gd
+res://scenes/carga/carga.tscn

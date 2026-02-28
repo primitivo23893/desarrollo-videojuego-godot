@@ -1,3 +1,6 @@
+AnimationPlayer
+Polygon2D
+ColorRect
 Node
 Control
 Timer
@@ -8,6 +11,4 @@ CollisionShape2D
 Sprite2D
 AudioStreamPlayer
 Label
-AnimationPlayer
 Marker2D
-AnimatedSprite2D
