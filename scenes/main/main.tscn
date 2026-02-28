@@ -5,11 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://bwhlkliwp13p4" path="res://scenes/player/player.tscn" id="3_veqnc"]
 [ext_resource type="PackedScene" uid="uid://b0efehuavobda" path="res://scenes/hud/hud.tscn" id="4_0qnje"]
 [ext_resource type="PackedScene" uid="uid://bf7upeglnp0iq" path="res://scenes/proyectil/proyectil.tscn" id="4_b1x3f"]
-[ext_resource type="AudioStream" uid="uid://sgfduhhw4pno" path="res://art/House In a Forest Loop.ogg" id="5_55d8h"]
 [ext_resource type="Texture2D" uid="uid://83nwcv3jsop" path="res://art/UndecimWallpaper.png" id="7_272bh"]
 [ext_resource type="AudioStream" uid="uid://ytivrcd7oft1" path="res://art/death.ogg" id="8_b1x3f"]
+[ext_resource type="AudioStream" uid="uid://2awc4sp5i2bc" path="res://art/Whys this dealer.ogg" id="8_ouso4"]
 [ext_resource type="PackedScene" uid="uid://duas2dar0ix2g" path="res://scenes/poweUp/power_up.tscn" id="8_yyfjg"]
 [ext_resource type="Script" uid="uid://1kh06ym3f3bm" path="res://scenes/main/control_pausa.gd" id="10_a8run"]
+[ext_resource type="PackedScene" uid="uid://badp76mimi0gq" path="res://scenes/carga/carga.tscn" id="11_ouso4"]
 
 [sub_resource type="Curve2D" id="1"]
 _data = {
@@ -26,7 +27,7 @@ power_up = ExtResource("8_yyfjg")
 position = Vector2(962, 589)
 
 [node name="Fondo" type="Sprite2D" parent="." unique_id=69808952]
-z_index = -1
+z_index = -2
 position = Vector2(1003.5135, 543)
 scale = Vector2(1.472973, 1.472973)
 texture = ExtResource("7_272bh")
@@ -57,7 +58,7 @@ curve = SubResource("1")
 [node name="HUD" parent="." unique_id=1879130737 instance=ExtResource("4_0qnje")]
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=267371681]
-stream = ExtResource("5_55d8h")
+stream = ExtResource("8_ouso4")
 volume_db = -34.667
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1715684712]
@@ -77,6 +78,10 @@ position = Vector2(1770, 930)
 [node name="ControlPausa" type="Node" parent="." unique_id=66412270]
 process_mode = 3
 script = ExtResource("10_a8run")
+
+[node name="Carga" parent="." unique_id=2079052992 instance=ExtResource("11_ouso4")]
+modulate = Color(0, 0, 0, 0.34901962)
+z_index = -1
 
 [connection signal="healthHUD" from="Player" to="HUD" method="update_health"]
 [connection signal="hit" from="Player" to="." method="game_over"]

@@ -11,8 +11,7 @@ func game_over():
 	$Music.stop()
 	$PowerUpTimer.stop()
 	$DeathSound.play()
-	
-
+	$Carga/AnimationPlayer.play(&"RESET")
 
 func new_game():
 	var tree = get_tree()

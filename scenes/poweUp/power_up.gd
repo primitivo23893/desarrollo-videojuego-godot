@@ -23,8 +23,10 @@ func _playerDetected(player: Area2D) -> void:
 	$powerUp.visible = false
 	$Area2D/CollisionShape2D.call_deferred("set_disabled", true)
 	$AudioStreamPlayer.play()
-	
 	player.power_up()
+	
+	$"../Carga/AnimationPlayer".play(&"carga")
+	
 	
 	
 

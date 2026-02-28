@@ -1,7 +1,7 @@
 63f7b34db8d8cdea90c76aacccf841ec
 ::res://::1772301919
 export_presets.cfg::TextFile::-1::1772256608::0::1::::<><><>0<>0<><>::
-::res://art/::1772302080
+::res://art/::1772311033
 cell_1.png::CompressedTexture2D::2749313975354061037::1772299310::1772302079::1::::<><><>0<>0<>620eff79a9b804cfd460248cf51b0e41<>res://.godot/imported/cell_1.png-24005677c97f543f2f8586ddfae17e8e.ctex::
 cell_2.png::CompressedTexture2D::3350535655757948792::1772164147::1772164157::1::::<><><>0<>0<>be2acfe40b006c9c4c65ddaee66cf58c<>res://.godot/imported/cell_2.png-4e8491622dc8ddd80b340576dacdcd51.ctex::
 classic_hurt.mp3::AudioStreamMP3::6452362262510391079::1772243801::1772243801::1::::<><><>0<>0<>60785da405d770406db10e710891e894<>res://.godot/imported/classic_hurt.mp3-d0ed3eccb6dd1d86fd8e75a628404720.mp3str::
@@ -29,6 +29,7 @@ UndecimWallpaper.png::CompressedTexture2D::69848916597445595::1761026269::177170
 UndecimWallpaperCompres.png::CompressedTexture2D::8668610349856243411::1772299077::1772302080::1::::<><><>0<>0<>38c8841208bf17890ea3c58f49c41f7a<>res://.godot/imported/UndecimWallpaperCompres.png-a92a789c916e591295b31a8cd149744c.ctex::
 Whatsapp.png::CompressedTexture2D::4782284414143017096::1690865460::1771698701::1::::<><><>0<>0<>c3e427e1994eb19b3c7db7f45f41090e<>res://.godot/imported/Whatsapp.png-07719d9c759c5f8c1ce5e6d447867dd0.ctex::
 Whatsapp_1.png::CompressedTexture2D::948867110952095596::1771699136::1771699138::1::::<><><>0<>0<>86cdc57d0ee4b6c16db00aa22ac72ffd<>res://.godot/imported/Whatsapp_1.png-1ae3c091900c8b2a0b607dc7c0564166.ctex::
+Whys this dealer.ogg::AudioStreamOggVorbis::1896439675361147152::1772311033::1772311034::1::::<><><>0<>0<>f2a806b63c7c67a7c5ad118bb3f01bd0<>res://.godot/imported/Whys this dealer.ogg-2c532f9600d7f9ec1f6cd172f2d63aee.oggvorbisstr::
 ::res://Exports/::1772301945
 ::res://Exports/HTML/::1772301940
 ::res://Exports/Unix/::1772301943
@@ -36,17 +37,19 @@ Whatsapp_1.png::CompressedTexture2D::948867110952095596::1771699136::1771699138:
 FONTLOG.txt::TextFile::-1::1771089705::0::1::::<><><>0<>0<><>::
 LICENSE.txt::TextFile::-1::1771089705::0::1::::<><><>0<>0<><>::
 Xolonium-Regular.ttf::FontFile::2852787775084712022::1771089705::1771693385::1::::<><><>0<>0<>8c2ab1ff5bef22361d2c83fdd500a4d3<>res://.godot/imported/Xolonium-Regular.ttf-bc2981e3069cff4c34dd7c8e2bb73fba.fontdata::
-::res://icon/::1772302102
+::res://icon/::1772302330
 icon.png::CompressedTexture2D::2217327823596376108::1772302065::1772302330::1::::<><><>0<>0<>c00327d308037640b542a4f6b0f48366<>res://.godot/imported/icon.png-ffd744aa4cf81fe1c91e4d1cd246c5a2.ctex::
 UndecimBanner.png::CompressedTexture2D::8080723508561219026::1761004272::1772132507::1::::<><><>0<>0<>2a4dbaf28e66aba130e0ee59c6604b34<>res://.godot/imported/UndecimBanner.png-a251ed6d1533d7442ec8be3baa5e3387.ctex::
 UndecimIcon.png::CompressedTexture2D::6809740632092643750::1761025854::1772138306::1::::<><><>0<>0<>86ff8359ef36b4f4ffab7b9d535aa5b4<>res://.godot/imported/UndecimIcon.png-ebef91f173c9d5ba33060c2fefa67692.ctex::
-::res://scenes/::1772251564
+::res://scenes/::1772306902
+::res://scenes/carga/::1772310527
+carga.tscn::PackedScene::2393583364393104448::1772310527::0::1::::<><><>0<>0<><>::
 ::res://scenes/hud/::1772298180
 hud.gd::GDScript::194471105334324705::1772298180::0::1::::<>CanvasLayer<><>0<>0<><>::
 hud.tscn::PackedScene::4149710412387755562::1772298180::0::1::::<><><>0<>0<><>::uid://c1g57034r2c0::::res://scenes/hud/hud.gd<>uid://bgv586r20ps8e::::res://fonts/Xolonium-Regular.ttf<>uid://cmstdkctsaw6d::::res://art/Timer.png<>uid://bupwkpvkwbq8h::::res://art/corazon.png
-::res://scenes/main/::1772297237
+::res://scenes/main/::1772310569
 main.gd::GDScript::6854943129266487135::1772296833::0::1::::<>Node<><>0<>0<><>::
-main.tscn::PackedScene::2820547996718400564::1772296916::0::1::::<><><>0<>0<><>::uid://c4wt6ace7hycd::::res://scenes/main/main.gd<>uid://cao351pllxqpa::::res://scenes/mob/mob.tscn<>uid://bwhlkliwp13p4::::res://scenes/player/player.tscn<>uid://b0efehuavobda::::res://scenes/hud/hud.tscn<>uid://bf7upeglnp0iq::::res://scenes/proyectil/proyectil.tscn<>uid://sgfduhhw4pno::::res://art/House In a Forest Loop.ogg<>uid://83nwcv3jsop::::res://art/UndecimWallpaper.png<>uid://ytivrcd7oft1::::res://art/death.ogg<>uid://duas2dar0ix2g::::res://scenes/poweUp/power_up.tscn<>uid://1kh06ym3f3bm::::res://scenes/main/control_pausa.gd
+main.tscn::PackedScene::2820547996718400564::1772310569::0::1::::<><><>0<>0<><>::uid://c4wt6ace7hycd::::res://scenes/main/main.gd<>uid://cao351pllxqpa::::res://scenes/mob/mob.tscn<>uid://bwhlkliwp13p4::::res://scenes/player/player.tscn<>uid://b0efehuavobda::::res://scenes/hud/hud.tscn<>uid://bf7upeglnp0iq::::res://scenes/proyectil/proyectil.tscn<>uid://sgfduhhw4pno::::res://art/House In a Forest Loop.ogg<>uid://83nwcv3jsop::::res://art/UndecimWallpaper.png<>uid://ytivrcd7oft1::::res://art/death.ogg<>uid://duas2dar0ix2g::::res://scenes/poweUp/power_up.tscn<>uid://1kh06ym3f3bm::::res://scenes/main/control_pausa.gd<>uid://badp76mimi0gq::::res://scenes/carga/carga.tscn
 control_pausa.gd::GDScript::1846025041808459270::1772297237::0::1::::<>Node<><>0<>0<><>::
 ::res://scenes/mob/::1772255087
 mob.gd::GDScript::6489762662277065615::1771089705::0::1::::<>RigidBody2D<><>0<>0<><>::
@@ -54,9 +57,9 @@ mob.tscn::PackedScene::4803497694852229190::1772255087::0::1::::<><><>0<>0<><>::
 ::res://scenes/player/::1772256060
 player.gd::GDScript::2214551732908234285::1772255011::0::1::::<>Area2D<><>0<>0<><>::
 player.tscn::PackedScene::3945712224003678091::1772256060::0::1::::<><><>0<>0<><>::uid://6s0lxctks3qn::::res://scenes/player/player.gd<>uid://bf7upeglnp0iq::::res://scenes/proyectil/proyectil.tscn<>uid://bff12ghk8yjdt::::res://art/cell_1.png<>uid://cx6tp1dxl6ej4::::res://art/classic_hurt.mp3<>uid://dlpqxjvdfaebq::::res://art/telegram_mini.png
-::res://scenes/poweUp/::1772254369
-power_up.gd::GDScript::4267528945990890591::1772254369::0::1::::<>Node2D<><>0<>0<><>::
+::res://scenes/poweUp/::1772310382
+power_up.gd::GDScript::4267528945990890591::1772310382::0::1::::<>Node2D<><>0<>0<><>::
 power_up.tscn::PackedScene::8564180204521382376::1772254369::0::1::::<><><>0<>0<><>::uid://b12htwpn4pb24::::res://scenes/poweUp/power_up.gd<>uid://riawyy6c0udy::::res://art/Telgram_brillo.png<>uid://cd8fr87okeyws::::res://art/Telegram.png<>uid://u2n0om6bgh2r::::res://art/Telegram_2.png<>uid://i66kgcsgr8p2::::res://art/powerup.ogg
-::res://scenes/proyectil/::1772255047
-proyectil.gd::GDScript::9011999719840427203::1772255047::0::1::::<>RigidBody2D<><>0<>0<><>::
+::res://scenes/proyectil/::1772310479
+proyectil.gd::GDScript::9011999719840427203::1772310479::0::1::::<>RigidBody2D<><>0<>0<><>::
 proyectil.tscn::PackedScene::2804666336657086380::1772254127::0::1::::<><><>0<>0<><>::uid://bygwp17hyfw0v::::res://art/trash.png<>uid://d1nqk3o23yijr::::res://scenes/proyectil/proyectil.gd
