@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bf7upeglnp0iq"]
+
+[ext_resource type="Texture2D" uid="uid://bygwp17hyfw0v" path="res://art/trash.png" id="1_l2nbq"]
+[ext_resource type="Script" uid="uid://d1nqk3o23yijr" path="res://scenes/proyectil/proyectil.gd" id="1_u5u4e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u5u4e"]
+radius = 33.0
+height = 74.0
+
+[node name="Proyectil" type="RigidBody2D" unique_id=1656982625]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+linear_velocity = Vector2(300, 0)
+linear_damp_mode = 1
+script = ExtResource("1_u5u4e")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1772162759]
+texture = ExtResource("1_l2nbq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1836517461]
+shape = SubResource("CapsuleShape2D_u5u4e")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1539456471]
+rect = Rect2(-38, -38, 76, 76)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=27144430]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=395285918]
+shape = SubResource("CapsuleShape2D_u5u4e")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ya_salio"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

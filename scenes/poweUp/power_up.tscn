@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://duas2dar0ix2g"]
+
+[ext_resource type="Script" uid="uid://b12htwpn4pb24" path="res://scenes/poweUp/power_up.gd" id="1_cuuj1"]
+[ext_resource type="Texture2D" uid="uid://riawyy6c0udy" path="res://art/Telgram_brillo.png" id="1_rax54"]
+[ext_resource type="Texture2D" uid="uid://cd8fr87okeyws" path="res://art/Telegram.png" id="2_cuuj1"]
+[ext_resource type="Texture2D" uid="uid://u2n0om6bgh2r" path="res://art/Telegram_2.png" id="3_g18vr"]
+[ext_resource type="AudioStream" uid="uid://i66kgcsgr8p2" path="res://art/powerup.ogg" id="5_g18vr"]
+
+[sub_resource type="Curve" id="Curve_cuuj1"]
+_limits = [1.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 2.5), 0.0, 0.0, 0, 0, Vector2(0.23584905, 1.3377244), -2.867213, -2.867213, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rax54"]
+radius = 67.0
+height = 134.0
+
+[sub_resource type="Animation" id="Animation_tofj3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5ako5"]
+resource_name = "flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i55g2"]
+_data = {
+&"RESET": SubResource("Animation_tofj3"),
+&"flash": SubResource("Animation_5ako5")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dkbhq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cuuj1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g18vr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_cuuj1"]
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="4"]
+gradient = SubResource("Gradient_cuuj1")
+
+[sub_resource type="Curve" id="Curve_g18vr"]
+_data = [Vector2(0, 0.46067423), 0.0, 0.0, 0, 0, Vector2(0.98496246, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="6"]
+curve = SubResource("Curve_g18vr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tofj3"]
+spread = 180.0
+initial_velocity_max = 203.94
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_curve = SubResource("6")
+color_ramp = SubResource("4")
+
+[node name="powerUp" type="Node2D" unique_id=978151696]
+script = ExtResource("1_cuuj1")
+Curva = SubResource("Curve_cuuj1")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1651703328]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2048553751]
+shape = SubResource("CapsuleShape2D_rax54")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=77007671]
+root_node = NodePath("../flash")
+libraries/ = SubResource("AnimationLibrary_i55g2")
+autoplay = &"flash"
+
+[node name="flash" type="Sprite2D" parent="." unique_id=1532213789]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("1_rax54")
+
+[node name="powerUp" type="AnimatedSprite2D" parent="." unique_id=678682627]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_dkbhq")
+autoplay = "default"
+frame = 1
+frame_progress = 0.039240666
+
+[node name="Trail" type="GPUParticles2D" parent="." unique_id=2010747882]
+z_index = -1
+emitting = false
+amount = 100
+texture = ExtResource("2_cuuj1")
+lifetime = 1.05
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_tofj3")
+
+[node name="Timer" type="Timer" parent="." unique_id=1754338215]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1301816241]
+stream = ExtResource("5_g18vr")
+volume_db = -25.06
+
+[connection signal="area_entered" from="Area2D" to="." method="_playerDetected"]
+[connection signal="finished" from="Trail" to="." method="_on_trail_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

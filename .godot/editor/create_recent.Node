@@ -1,0 +1,13 @@
+Node
+Control
+Timer
+Area2D
+RigidBody2D
+StaticBody2D
+CollisionShape2D
+Sprite2D
+AudioStreamPlayer
+Label
+AnimationPlayer
+Marker2D
+AnimatedSprite2D

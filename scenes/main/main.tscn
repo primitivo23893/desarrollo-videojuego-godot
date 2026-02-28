@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://bggkaprn62fwm"]
+
+[ext_resource type="Script" uid="uid://c4wt6ace7hycd" path="res://scenes/main/main.gd" id="1_0r6n5"]
+[ext_resource type="PackedScene" uid="uid://cao351pllxqpa" path="res://scenes/mob/mob.tscn" id="2_50pww"]
+[ext_resource type="PackedScene" uid="uid://bwhlkliwp13p4" path="res://scenes/player/player.tscn" id="3_veqnc"]
+[ext_resource type="PackedScene" uid="uid://b0efehuavobda" path="res://scenes/hud/hud.tscn" id="4_0qnje"]
+[ext_resource type="PackedScene" uid="uid://bf7upeglnp0iq" path="res://scenes/proyectil/proyectil.tscn" id="4_b1x3f"]
+[ext_resource type="AudioStream" uid="uid://sgfduhhw4pno" path="res://art/House In a Forest Loop.ogg" id="5_55d8h"]
+[ext_resource type="Texture2D" uid="uid://83nwcv3jsop" path="res://art/UndecimWallpaper.png" id="7_272bh"]
+[ext_resource type="AudioStream" uid="uid://ytivrcd7oft1" path="res://art/death.ogg" id="8_b1x3f"]
+[ext_resource type="PackedScene" uid="uid://duas2dar0ix2g" path="res://scenes/poweUp/power_up.tscn" id="8_yyfjg"]
+[ext_resource type="Script" uid="uid://1kh06ym3f3bm" path="res://scenes/main/control_pausa.gd" id="10_a8run"]
+
+[sub_resource type="Curve2D" id="1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1924, 1091, 0, 0, 0, 0, 0, 1091.0002, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Main" type="Node" unique_id=1975992027]
+script = ExtResource("1_0r6n5")
+mob_scene = ExtResource("2_50pww")
+power_up = ExtResource("8_yyfjg")
+
+[node name="Proyectil" parent="." unique_id=1656982625 instance=ExtResource("4_b1x3f")]
+position = Vector2(962, 589)
+
+[node name="Fondo" type="Sprite2D" parent="." unique_id=69808952]
+z_index = -1
+position = Vector2(1003.5135, 543)
+scale = Vector2(1.472973, 1.472973)
+texture = ExtResource("7_272bh")
+
+[node name="Player" parent="." unique_id=927660131 instance=ExtResource("3_veqnc")]
+
+[node name="MobTimer" type="Timer" parent="." unique_id=228987391]
+wait_time = 0.3
+
+[node name="ScoreTimer" type="Timer" parent="." unique_id=451982858]
+
+[node name="StartTimer" type="Timer" parent="." unique_id=238316384]
+wait_time = 2.0
+one_shot = true
+
+[node name="PowerUpTimer" type="Timer" parent="." unique_id=268822156]
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="." unique_id=568887530]
+position = Vector2(952, 616)
+
+[node name="MobPath" type="Path2D" parent="." unique_id=694323229]
+scale = Vector2(0.997921, 0.9899174)
+curve = SubResource("1")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" unique_id=1080274542]
+
+[node name="HUD" parent="." unique_id=1879130737 instance=ExtResource("4_0qnje")]
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=267371681]
+stream = ExtResource("5_55d8h")
+volume_db = -34.667
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1715684712]
+stream = ExtResource("8_b1x3f")
+volume_db = -24.061
+pitch_scale = 3.0
+
+[node name="powerUp" parent="." unique_id=978151696 instance=ExtResource("8_yyfjg")]
+position = Vector2(571, 722)
+
+[node name="MarkerArribaIz" type="Marker2D" parent="." unique_id=1836554784]
+position = Vector2(150, 150)
+
+[node name="MarkerArribaDe" type="Marker2D" parent="." unique_id=1601408321]
+position = Vector2(1770, 930)
+
+[node name="ControlPausa" type="Node" parent="." unique_id=66412270]
+process_mode = 3
+script = ExtResource("10_a8run")
+
+[connection signal="healthHUD" from="Player" to="HUD" method="update_health"]
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
+[connection signal="timeout" from="PowerUpTimer" to="." method="_on_power_up_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
