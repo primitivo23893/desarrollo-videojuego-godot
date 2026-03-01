@@ -13,31 +13,21 @@ func _ready():
 
 
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
-	if Input.is_action_pressed(&"move_right"):
-		velocity.x += 1
-	if Input.is_action_pressed(&"move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed(&"move_down"):
-		velocity.y += 1
-	if Input.is_action_pressed(&"move_up"):
-		velocity.y -= 1
-		
+	var input_vector = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down")
+	
+	var velocity = input_vector * speed
+	
 	if Input.is_action_just_pressed(&"shoot") and not $ShootTimer.is_stopped():
 		var Proyectil = proyectil.instantiate()
 		Proyectil.position = position + Vector2(0.0, -90.0).rotated(rotation) 
-		
 		add_sibling(Proyectil)
 		
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
+	if input_vector.length() > 0:
 		$AnimationPlayer.play("bouncy")
 		
-		var move_angle = velocity.angle()
+		var move_angle = input_vector.angle()
 		var offset = PI / 2
-		
 		rotation = move_angle + offset
-
 		
 	else:
 		$AnimationPlayer.stop()

@@ -57,10 +57,10 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.19999999),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(0.5, 0.5), Vector2(0.658, 0.411)]
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.658, 0.411), Vector2(0.5, 0.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -69,10 +69,10 @@ tracks/1/path = NodePath("../TelegramMini:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.19999999),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(0.5, 0.5), Vector2(0.658, 0.411)]
+"times": PackedFloat32Array(0, 0.19999999, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.658, 0.411), Vector2(0.5, 0.5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p47bc"]
@@ -82,7 +82,7 @@ _data = {
 }
 
 [node name="Player" type="Area2D" unique_id=286980980]
-z_index = 10
+z_index = 2
 scale = Vector2(5, 5)
 collision_layer = 3
 script = ExtResource("1")
@@ -105,7 +105,7 @@ texture = ExtResource("2_p47bc")
 [node name="TelegramMini" type="Sprite2D" parent="." unique_id=338171739]
 visible = false
 position = Vector2(0.1999998, 0.20000003)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.5824499, 0.45355672)
 texture = ExtResource("4_p47bc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=100095077]
@@ -114,12 +114,13 @@ libraries/ = SubResource("AnimationLibrary_p47bc")
 autoplay = &"bouncy"
 
 [node name="Enfriamienro" type="Timer" parent="." unique_id=2123354609]
-wait_time = 3.0
+wait_time = 4.0
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1873683558]
 stream = ExtResource("3_gmlin")
 volume_db = -29.446
+bus = &"Efects"
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=2134756397]
 wait_time = 4.0

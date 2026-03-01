@@ -157,6 +157,7 @@ autostart = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1301816241]
 stream = ExtResource("5_g18vr")
 volume_db = -25.06
+bus = &"Efects"
 
 [connection signal="area_entered" from="Area2D" to="." method="_playerDetected"]
 [connection signal="finished" from="Trail" to="." method="_on_trail_finished"]

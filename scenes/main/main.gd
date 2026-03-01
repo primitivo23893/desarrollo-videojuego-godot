@@ -2,6 +2,9 @@ extends Node
 
 @export var mob_scene: PackedScene
 @export var power_up: PackedScene
+
+@export var shader:ShaderMaterial
+
 var score
 const VIDAS = 3
 func game_over():
@@ -21,11 +24,13 @@ func new_game():
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
-	$HUD.show_message("Listo?...")
+	$HUD.show_message("Que Meta no te atrape!")
 	$Music.play()
 	
 	$HUD.update_health(VIDAS)
 	$Player.vidas = VIDAS
+	
+	shader.set_shader_parameter(&"ColorParameter", Vector3(0,0,0))
 
 
 

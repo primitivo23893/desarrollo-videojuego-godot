@@ -1,8 +1,0 @@
-res://scenes/hud/hud.tscn
-res://scenes/main/main.gd
-res://scenes/main/main.tscn
-res://scenes/main/control_pausa.gd
-res://scenes/hud/hud.gd
-res://scenes/carga/carga.tscn
-res://scenes/poweUp/power_up.gd
-res://scenes/proyectil/proyectil.gd
