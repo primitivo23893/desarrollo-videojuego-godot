@@ -5,6 +5,7 @@ signal start_game
 var kills = 0
 
 func _ready() -> void:
+	$Fade.show()
 	$Mobile.hide()
 	# Easter egg
 	$ScoreKillLabel.hide()

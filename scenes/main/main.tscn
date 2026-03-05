@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cao351pllxqpa" path="res://scenes/mob/mob.tscn" id="2_50pww"]
 [ext_resource type="PackedScene" uid="uid://bwhlkliwp13p4" path="res://scenes/player/player.tscn" id="3_veqnc"]
 [ext_resource type="PackedScene" uid="uid://b0efehuavobda" path="res://scenes/hud/hud.tscn" id="4_0qnje"]
-[ext_resource type="PackedScene" uid="uid://bf7upeglnp0iq" path="res://scenes/proyectil/proyectil.tscn" id="4_b1x3f"]
 [ext_resource type="Texture2D" uid="uid://83nwcv3jsop" path="res://art/UndecimWallpaper.png" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://duas2dar0ix2g" path="res://scenes/poweUp/power_up.tscn" id="8_yyfjg"]
 [ext_resource type="AudioStream" uid="uid://sianin2jdokl" path="res://audio/WhysThisDealerMusic.ogg" id="9_blune"]
@@ -31,9 +30,6 @@ script = ExtResource("1_0r6n5")
 mob_scene = ExtResource("2_50pww")
 power_up = ExtResource("8_yyfjg")
 shader = SubResource("ShaderMaterial_th5th")
-
-[node name="Proyectil" parent="." unique_id=1656982625 instance=ExtResource("4_b1x3f")]
-position = Vector2(962, 589)
 
 [node name="Fondo" type="Sprite2D" parent="." unique_id=69808952]
 z_index = -2
@@ -73,9 +69,6 @@ bus = &"Music"
 [node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1715684712]
 stream = ExtResource("10_blune")
 bus = &"Efects"
-
-[node name="powerUp" parent="." unique_id=978151696 instance=ExtResource("8_yyfjg")]
-position = Vector2(571, 722)
 
 [node name="MarkerArribaIz" type="Marker2D" parent="." unique_id=1836554784]
 position = Vector2(150, 150)
