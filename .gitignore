@@ -1,3 +1,9 @@
 .import
 logs/
 Exports/
+.godot/
+.import/
+.export/
+*.translation
+*.cfg
+*.tmp

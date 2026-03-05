@@ -3,8 +3,11 @@
 [ext_resource type="Script" uid="uid://6s0lxctks3qn" path="res://scenes/player/player.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bf7upeglnp0iq" path="res://scenes/proyectil/proyectil.tscn" id="2_lvxji"]
 [ext_resource type="Texture2D" uid="uid://bff12ghk8yjdt" path="res://art/cell_1.png" id="2_p47bc"]
-[ext_resource type="AudioStream" uid="uid://cx6tp1dxl6ej4" path="res://art/classic_hurt.mp3" id="3_gmlin"]
 [ext_resource type="Texture2D" uid="uid://dlpqxjvdfaebq" path="res://art/telegram_mini.png" id="4_p47bc"]
+[ext_resource type="AudioStream" uid="uid://dljn1nr2kgkwl" path="res://audio/damage.ogg" id="5_p47bc"]
+[ext_resource type="Texture2D" uid="uid://bmrmj6eikc4y6" path="res://art/cell_roto.png" id="6_75vfm"]
+[ext_resource type="Script" uid="uid://bnho55lr7y5mn" path="res://addons/konamicode/konamicode.gd" id="7_0owmy"]
+[ext_resource type="AudioStream" uid="uid://bfkyxfkj2q08l" path="res://audio/easter_egg.ogg" id="8_qek5x"]
 
 [sub_resource type="CapsuleShape2D" id="2"]
 radius = 8.0
@@ -13,22 +16,68 @@ height = 27.999998
 [sub_resource type="Gradient" id="3"]
 colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_p47bc"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_75vfm"]
 gradient = SubResource("3")
 
 [sub_resource type="Curve" id="5"]
 _data = [Vector2(0.00501098, 0.5), 0.0, 0.0, 0, 0, Vector2(0.994989, 0.324), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_75vfm"]
+[sub_resource type="CurveTexture" id="CurveTexture_0owmy"]
 curve = SubResource("5")
 
 [sub_resource type="ParticleProcessMaterial" id="7"]
 gravity = Vector3(0, 0, 0)
 scale_min = 3.5
 scale_max = 5.0
-scale_curve = SubResource("CurveTexture_75vfm")
-color_ramp = SubResource("GradientTexture1D_p47bc")
+scale_curve = SubResource("CurveTexture_0owmy")
+color_ramp = SubResource("GradientTexture1D_75vfm")
+
+[sub_resource type="Gradient" id="Gradient_0owmy"]
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qek5x"]
+gradient = SubResource("Gradient_0owmy")
+
+[sub_resource type="Curve" id="Curve_qek5x"]
+_data = [Vector2(0, 0.46067423), 0.0, 0.0, 0, 0, Vector2(0.98496246, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5gtgg"]
+curve = SubResource("Curve_qek5x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5gtgg"]
+spread = 180.0
+initial_velocity_max = 198.97
+angular_velocity_min = 99.999985
+angular_velocity_max = 130.74998
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 12.0
+scale_curve = SubResource("CurveTexture_5gtgg")
+color_ramp = SubResource("GradientTexture1D_qek5x")
+
+[sub_resource type="Gradient" id="Gradient_qek5x"]
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8nkf1"]
+gradient = SubResource("Gradient_qek5x")
+
+[sub_resource type="Curve" id="Curve_5gtgg"]
+_data = [Vector2(0, 0.46067423), 0.0, 0.0, 0, 0, Vector2(0.98496246, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="6"]
+curve = SubResource("Curve_5gtgg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h17s1"]
+spread = 180.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 6.0
+scale_curve = SubResource("6")
+color_ramp = SubResource("GradientTexture1D_8nkf1")
 
 [sub_resource type="Animation" id="Animation_gmlin"]
 length = 0.001
@@ -84,11 +133,16 @@ _data = {
 [node name="Player" type="Area2D" unique_id=286980980]
 z_index = 2
 scale = Vector2(5, 5)
-collision_layer = 3
 script = ExtResource("1")
 proyectil = ExtResource("2_lvxji")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1561959185]
+[node name="Area2D" type="Area2D" parent="." unique_id=1472069765]
+scale = Vector2(0.99999976, 0.99999976)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CellParticle" type="CollisionShape2D" parent="Area2D" unique_id=266337221]
+scale = Vector2(0.9999996, 0.9999996)
 shape = SubResource("2")
 
 [node name="Trail" type="GPUParticles2D" parent="." unique_id=1790145477]
@@ -97,6 +151,30 @@ amount = 10
 texture = ExtResource("2_p47bc")
 speed_scale = 2.0
 process_material = SubResource("7")
+
+[node name="Death" type="GPUParticles2D" parent="." unique_id=376812710]
+z_index = -1
+scale = Vector2(0.99999994, 0.99999994)
+emitting = false
+amount = 100
+texture = ExtResource("6_75vfm")
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5gtgg")
+
+[node name="Damage" type="GPUParticles2D" parent="." unique_id=331582380]
+z_index = -1
+scale = Vector2(0.99999976, 0.99999976)
+emitting = false
+amount = 60
+texture = ExtResource("6_75vfm")
+lifetime = 0.81
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_h17s1")
 
 [node name="Cell" type="Sprite2D" parent="." unique_id=551456338]
 scale = Vector2(0.5, 0.5)
@@ -113,19 +191,36 @@ root_node = NodePath("../Cell")
 libraries/ = SubResource("AnimationLibrary_p47bc")
 autoplay = &"bouncy"
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1561959185]
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("2")
+
 [node name="Enfriamienro" type="Timer" parent="." unique_id=2123354609]
 wait_time = 4.0
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1873683558]
-stream = ExtResource("3_gmlin")
-volume_db = -29.446
+stream = ExtResource("5_p47bc")
 bus = &"Efects"
 
 [node name="ShootTimer" type="Timer" parent="." unique_id=2134756397]
 wait_time = 4.0
 one_shot = true
 
+[node name="TimeLimit" type="Timer" parent="." unique_id=1637574358]
+wait_time = 2.5
+one_shot = true
+
+[node name="KonamiCode" type="Node" parent="." unique_id=61340695 node_paths=PackedStringArray("timer")]
+script = ExtResource("7_0owmy")
+time_limit_mode = true
+timer = NodePath("../TimeLimit")
+
+[node name="EasterEgg" type="AudioStreamPlayer" parent="." unique_id=1045376594]
+stream = ExtResource("8_qek5x")
+volume_db = -4.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Enfriamienro" to="." method="_on_enfriamienro_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="success" from="KonamiCode" to="." method="_on_konami_code_success"]

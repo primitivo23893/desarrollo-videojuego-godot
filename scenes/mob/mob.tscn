@@ -5,8 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://42cyg5q3a4s3" path="res://art/Facebook_1.png" id="3_gfurk"]
 [ext_resource type="Texture2D" uid="uid://8fx1lhnnxbwp" path="res://art/Instagram.png" id="4_1qmh0"]
 [ext_resource type="Texture2D" uid="uid://bp1mp2j6okhh" path="res://art/Instagram_1.png" id="5_gfurk"]
+[ext_resource type="Texture2D" uid="uid://c0qc42n2kcvhe" path="res://art/Messenger.png" id="6_c5yut"]
 [ext_resource type="Texture2D" uid="uid://caetr4ug11hb1" path="res://art/Whatsapp.png" id="6_ieysi"]
 [ext_resource type="Texture2D" uid="uid://nrvx5km2w1t5" path="res://art/Whatsapp_1.png" id="7_cixyi"]
+[ext_resource type="Texture2D" uid="uid://s86pw7npxd66" path="res://art/Messenger_1.png" id="7_iba42"]
+[ext_resource type="Texture2D" uid="uid://caccfvh5pr2qw" path="res://art/particle.svg" id="8_0a8ii"]
+[ext_resource type="AudioStream" uid="uid://dbxjfqmw8n3ab" path="res://audio/pop.ogg" id="9_q52e7"]
 
 [sub_resource type="SpriteFrames" id="1"]
 animations = [{
@@ -29,7 +33,18 @@ animations = [{
 "texture": ExtResource("5_gfurk")
 }],
 "loop": true,
-"name": &"swim",
+"name": &"instagram",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_c5yut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iba42")
+}],
+"loop": true,
+"name": &"messanger",
 "speed": 3.0
 }, {
 "frames": [{
@@ -48,21 +63,74 @@ animations = [{
 radius = 39.0
 height = 78.0
 
+[sub_resource type="Gradient" id="Gradient_q52e7"]
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="4"]
+gradient = SubResource("Gradient_q52e7")
+
+[sub_resource type="Curve" id="Curve_tyl3q"]
+_data = [Vector2(0, 0.46067423), 0.0, 0.0, 0, 0, Vector2(0.98496246, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="6"]
+curve = SubResource("Curve_tyl3q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c5yut"]
+direction = Vector3(0, -50, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 399.0
+angular_velocity_min = 99.999985
+angular_velocity_max = 130.74998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.79999995
+scale_curve = SubResource("6")
+color_ramp = SubResource("4")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tyl3q"]
+playback_mode = 1
+random_pitch = 1.10605
+streams_count = 1
+stream_0/stream = ExtResource("9_q52e7")
+
 [node name="Mob" type="RigidBody2D" unique_id=1344237816 groups=["mobs"]]
 collision_layer = 5
 collision_mask = 0
 gravity_scale = 0.0
 linear_damp_mode = 1
 script = ExtResource("1")
+colores = PackedColorArray(0.35000002, 0.6316667, 1, 1, 1, 0.32156864, 0.94509804, 1, 0.51, 0.7223334, 1, 1, 0.30588236, 0.83137256, 0.49803922, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1219813130]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("1")
-animation = &"whatsapp"
+animation = &"messanger"
+frame_progress = 0.95648587
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1001863209]
+visible = false
 shape = SubResource("2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=383499912]
+visible = false
+rect = Rect2(-41, -41, 82, 82)
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[node name="Death" type="GPUParticles2D" parent="." unique_id=1543841545]
+z_index = -1
+scale = Vector2(0.99999994, 0.99999994)
+emitting = false
+amount = 100
+texture = ExtResource("8_0a8ii")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_c5yut")
+
+[node name="Pop" type="AudioStreamPlayer" parent="." unique_id=1417185700]
+stream = SubResource("AudioStreamRandomizer_tyl3q")
+bus = &"Efects"
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_destroy"]
+[connection signal="finished" from="Death" to="." method="_destroy"]

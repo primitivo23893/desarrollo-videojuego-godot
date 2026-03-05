@@ -15,6 +15,8 @@ func game_over():
 	$PowerUpTimer.stop()
 	$DeathSound.play()
 	$Carga/AnimationPlayer.play(&"RESET")
+	get_tree().call_group(&"proyectiles", &"queue_free")
+	
 
 func new_game():
 	var tree = get_tree()
@@ -24,13 +26,15 @@ func new_game():
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
-	$HUD.show_message("Que Meta no te atrape!")
+	$HUD.show_message("¡Que Meta no te atrape!")
 	$Music.play()
 	
 	$HUD.update_health(VIDAS)
 	$Player.vidas = VIDAS
 	
 	shader.set_shader_parameter(&"ColorParameter", Vector3(0,0,0))
+	
+	$HUD.update_score_kill()
 
 
 
@@ -67,7 +71,7 @@ func _on_power_up_timer_timeout() -> void:
 	var yRandom = randf_range(minPos.y, maxPos.y)
 	
 	powerUp.position = Vector2(xRandom, yRandom)
-	
+
 	add_child(powerUp)
 
 

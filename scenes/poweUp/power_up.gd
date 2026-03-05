@@ -1,4 +1,4 @@
-extends Node2D
+extends Node2D #PowerUp
 @export var Curva: Curve
 
 # Called when the node enters the scene tree for the first time.
@@ -17,17 +17,17 @@ func _process(_delta: float) -> void:
 	$AnimationPlayer.speed_scale = velocidad
 
 
-func _playerDetected(player: Area2D) -> void:
+func _playerDetected(player: Area2D) -> void: #
+	
 	$Trail.emitting = true
 	$flash.visible = false
 	$powerUp.visible = false
 	$Area2D/CollisionShape2D.call_deferred("set_disabled", true)
 	$AudioStreamPlayer.play()
-	player.power_up()
+	
+	player.get_parent().power_up()
 	
 	$"../Carga/AnimationPlayer".play(&"carga")
-	
-	
 	
 
 

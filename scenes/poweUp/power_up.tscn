@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://riawyy6c0udy" path="res://art/Telgram_brillo.png" id="1_rax54"]
 [ext_resource type="Texture2D" uid="uid://cd8fr87okeyws" path="res://art/Telegram.png" id="2_cuuj1"]
 [ext_resource type="Texture2D" uid="uid://u2n0om6bgh2r" path="res://art/Telegram_2.png" id="3_g18vr"]
-[ext_resource type="AudioStream" uid="uid://i66kgcsgr8p2" path="res://art/powerup.ogg" id="5_g18vr"]
+[ext_resource type="AudioStream" uid="uid://cjcf45mubuy2k" path="res://audio/powerUp.ogg" id="5_g18vr"]
 
 [sub_resource type="Curve" id="Curve_cuuj1"]
 _limits = [1.0, 4.0, 0.0, 1.0]
@@ -156,7 +156,6 @@ autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1301816241]
 stream = ExtResource("5_g18vr")
-volume_db = -25.06
 bus = &"Efects"
 
 [connection signal="area_entered" from="Area2D" to="." method="_playerDetected"]

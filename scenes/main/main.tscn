@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://b0efehuavobda" path="res://scenes/hud/hud.tscn" id="4_0qnje"]
 [ext_resource type="PackedScene" uid="uid://bf7upeglnp0iq" path="res://scenes/proyectil/proyectil.tscn" id="4_b1x3f"]
 [ext_resource type="Texture2D" uid="uid://83nwcv3jsop" path="res://art/UndecimWallpaper.png" id="7_272bh"]
-[ext_resource type="AudioStream" uid="uid://ytivrcd7oft1" path="res://art/death.ogg" id="8_b1x3f"]
-[ext_resource type="AudioStream" uid="uid://2awc4sp5i2bc" path="res://art/Whys this dealer.ogg" id="8_ouso4"]
 [ext_resource type="PackedScene" uid="uid://duas2dar0ix2g" path="res://scenes/poweUp/power_up.tscn" id="8_yyfjg"]
+[ext_resource type="AudioStream" uid="uid://sianin2jdokl" path="res://audio/WhysThisDealerMusic.ogg" id="9_blune"]
 [ext_resource type="Script" uid="uid://1kh06ym3f3bm" path="res://scenes/main/control_pausa.gd" id="10_a8run"]
+[ext_resource type="AudioStream" uid="uid://c7cghebveafcg" path="res://audio/death.ogg" id="10_blune"]
 [ext_resource type="Shader" uid="uid://6q3f8775r3sk" path="res://scenes/main/damage.tres" id="11_blune"]
 [ext_resource type="PackedScene" uid="uid://badp76mimi0gq" path="res://scenes/carga/carga.tscn" id="11_ouso4"]
 
@@ -67,14 +67,11 @@ curve = SubResource("1")
 [node name="HUD" parent="." unique_id=1879130737 instance=ExtResource("4_0qnje")]
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=267371681]
-stream = ExtResource("8_ouso4")
-volume_db = -34.667
+stream = ExtResource("9_blune")
 bus = &"Music"
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1715684712]
-stream = ExtResource("8_b1x3f")
-volume_db = -24.061
-pitch_scale = 3.0
+stream = ExtResource("10_blune")
 bus = &"Efects"
 
 [node name="powerUp" parent="." unique_id=978151696 instance=ExtResource("8_yyfjg")]
@@ -94,6 +91,7 @@ script = ExtResource("10_a8run")
 modulate = Color(0, 0, 0, 0.34901962)
 z_index = -1
 
+[connection signal="easter" from="Player" to="HUD" method="show_easter_egg"]
 [connection signal="healthHUD" from="Player" to="HUD" method="update_health"]
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]

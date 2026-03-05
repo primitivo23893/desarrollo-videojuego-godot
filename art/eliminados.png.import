@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tuwiedi17dqc"
-path="res://.godot/imported/Facebook Messenger.png-19a58b689a5a644530eb7475e47c4342.ctex"
+uid="uid://dtl2dqdlaj1ao"
+path="res://.godot/imported/eliminados.png-2e6e89a5367f039cc6af03b0a971d927.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Facebook Messenger.png"
-dest_files=["res://.godot/imported/Facebook Messenger.png-19a58b689a5a644530eb7475e47c4342.ctex"]
+source_file="res://art/eliminados.png"
+dest_files=["res://.godot/imported/eliminados.png-2e6e89a5367f039cc6af03b0a971d927.ctex"]
 
 [params]
 

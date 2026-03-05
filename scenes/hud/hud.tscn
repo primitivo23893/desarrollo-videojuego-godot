@@ -7,8 +7,47 @@
 [ext_resource type="Shader" uid="uid://6q3f8775r3sk" path="res://scenes/main/damage.tres" id="5_mgtrf"]
 [ext_resource type="Texture2D" uid="uid://dna8j0r5ldrfu" path="res://art/pause.png" id="6_mq0y1"]
 [ext_resource type="Texture2D" uid="uid://bm30au8mjfc2f" path="res://addons/virtual_joystick/textures/joystick_base_outline.png" id="6_n56i7"]
+[ext_resource type="Texture2D" uid="uid://caccfvh5pr2qw" path="res://art/particle.svg" id="6_q6mn5"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="7_mq0y1"]
 [ext_resource type="Shader" uid="uid://baxh0wirbxf8a" path="res://scenes/hud/blur.gdshader" id="9_go0ap"]
+[ext_resource type="Texture2D" uid="uid://dtl2dqdlaj1ao" path="res://art/eliminados.png" id="10_nhd55"]
+
+[sub_resource type="Animation" id="Animation_q6mn5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8nkf1"]
+resource_name = "fade"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_558d4"]
+_data = {
+&"RESET": SubResource("Animation_q6mn5"),
+&"fade": SubResource("Animation_8nkf1")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_blune"]
 resource_local_to_scene = true
@@ -79,11 +118,40 @@ _data = {
 &"damage": SubResource("Animation_th5th")
 }
 
+[sub_resource type="Gradient" id="Gradient_8nkf1"]
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="4"]
+gradient = SubResource("Gradient_8nkf1")
+
+[sub_resource type="Curve" id="Curve_558d4"]
+_data = [Vector2(0, 0.46067423), 0.0, 0.0, 0, 0, Vector2(0.98496246, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="6"]
+curve = SubResource("Curve_558d4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4m1a1"]
+direction = Vector3(0, -50, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 399.0
+angular_velocity_min = 99.999985
+angular_velocity_max = 130.74998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.79999995
+scale_curve = SubResource("6")
+color_ramp = SubResource("4")
+
 [sub_resource type="InputEventAction" id="InputEventAction_fopy7"]
 action = &"start_game"
 
-[sub_resource type="Shortcut" id="4"]
+[sub_resource type="Shortcut" id="Shortcut_iioc1"]
 events = [SubResource("InputEventAction_fopy7")]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mq0y1"]
+size = Vector2(307, 141)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nhd55"]
 shader = ExtResource("9_go0ap")
@@ -97,14 +165,27 @@ events = [SubResource("InputEventAction_go0ap")]
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_go0ap"]
 size = Vector2(569, 141)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mq0y1"]
-size = Vector2(307, 141)
-
 [node name="HUD" type="CanvasLayer" unique_id=722490725]
 process_mode = 3
 script = ExtResource("1")
 
+[node name="Fade" type="ColorRect" parent="." unique_id=1957952002]
+modulate = Color(1, 1, 1, 0)
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.15686275, 0.22352941, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fade" unique_id=1150915875]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_558d4")
+autoplay = &"fade"
+
 [node name="DamageIndicator" type="ColorRect" parent="." unique_id=1797801423]
+process_mode = 1
 material = SubResource("ShaderMaterial_blune")
 anchors_preset = 15
 anchor_right = 1.0
@@ -128,9 +209,41 @@ theme_override_font_sizes/font_size = 80
 text = "0"
 horizontal_alignment = 2
 
+[node name="ScoreKillLabel" type="Label" parent="." unique_id=917182803]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -560.0
+offset_right = -390.0
+offset_bottom = 97.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_2jm3i")
+theme_override_font_sizes/font_size = 80
+text = "0"
+horizontal_alignment = 2
+
+[node name="Eliminados" type="Sprite2D" parent="." unique_id=504873806]
+visible = false
+position = Vector2(1576.0001, 50.000004)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_nhd55")
+
 [node name="Timer" type="Sprite2D" parent="." unique_id=641430174]
 position = Vector2(1880, 51)
 texture = ExtResource("3_0bx4p")
+
+[node name="EasterEggParticle" type="GPUParticles2D" parent="." unique_id=577948991]
+z_index = -1
+position = Vector2(1538, 64)
+scale = Vector2(0.99999994, 0.99999994)
+emitting = false
+amount = 100
+texture = ExtResource("6_q6mn5")
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_4m1a1")
 
 [node name="MessageLabel" type="Label" parent="." unique_id=1482640614]
 anchors_preset = 14
@@ -153,8 +266,8 @@ one_shot = true
 [node name="Control" type="Control" parent="." unique_id=2134973279]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 250.0
+offset_bottom = 86.0
 
 [node name="Corazon1" type="Sprite2D" parent="Control" unique_id=2066727169]
 position = Vector2(10, 9)
@@ -172,6 +285,7 @@ texture = ExtResource("3_c45xl")
 centered = false
 
 [node name="Mobile" type="Control" parent="." unique_id=1602344020]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -189,6 +303,9 @@ grow_horizontal = 2
 mouse_filter = 2
 
 [node name="Pause" type="TouchScreenButton" parent="Mobile/Arriba" unique_id=1016093677]
+modulate = Color(1, 1, 1, 0.3529412)
+position = Vector2(-56, 0)
+scale = Vector2(0.93333334, 0.93333334)
 texture_normal = ExtResource("6_mq0y1")
 action = "pause"
 
@@ -197,10 +314,11 @@ anchors_preset = 0
 mouse_filter = 2
 
 [node name="Virtual Joystick" parent="Mobile/Abajo" unique_id=246291553 instance=ExtResource("7_mq0y1")]
+modulate = Color(1, 1, 1, 0.3529412)
 layout_mode = 1
-offset_top = 691.0
-offset_right = 386.0
-offset_bottom = 1077.0
+offset_top = 680.0
+offset_right = 400.0
+offset_bottom = 1080.0
 mouse_filter = 2
 action_left = "move_left"
 action_right = "move_right"
@@ -208,12 +326,13 @@ action_up = "move_up"
 action_down = "move_down"
 
 [node name="Shoot" type="TouchScreenButton" parent="Mobile/Abajo" unique_id=1062671913]
-position = Vector2(1580, 775)
+modulate = Color(1, 1, 1, 0.3529412)
+position = Vector2(1624, 780)
 texture_normal = ExtResource("6_n56i7")
 action = "shoot"
 
 [node name="StartButton" type="Button" parent="." unique_id=358630286]
-z_index = 10
+process_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -228,8 +347,12 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_2jm3i")
 theme_override_font_sizes/font_size = 110
 action_mode = 0
-shortcut = SubResource("4")
+shortcut = SubResource("Shortcut_iioc1")
 text = "Inicio"
+
+[node name="StartTouch" type="TouchScreenButton" parent="." unique_id=910109025]
+position = Vector2(960, 907)
+shape = SubResource("RectangleShape2D_mq0y1")
 
 [node name="MenuPausa" type="Control" parent="." unique_id=244862251]
 visible = false
@@ -252,8 +375,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -308.0
-offset_bottom = -199.0
+offset_top = -404.0
+offset_bottom = -295.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_2jm3i")
@@ -271,18 +394,54 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -283.0
-offset_top = 137.0
+offset_top = 211.0
 offset_right = 286.0
-offset_bottom = 278.0
+offset_bottom = 352.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_neighbor_top = NodePath("../SlideMusicEfects")
-focus_neighbor_bottom = NodePath("../SlideMusic")
+focus_neighbor_bottom = NodePath("../SlideMaster")
 theme_override_fonts/font = ExtResource("2_2jm3i")
 theme_override_font_sizes/font_size = 110
 action_mode = 0
 shortcut = SubResource("Shortcut_q6mn5")
 text = "Continuar"
+
+[node name="PorcentajeMaster" type="Label" parent="MenuPausa" unique_id=1541659291]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 768.0
+offset_top = -210.0
+offset_right = -768.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_2jm3i")
+theme_override_font_sizes/font_size = 49
+text = "General: 100%"
+horizontal_alignment = 3
+vertical_alignment = 1
+
+[node name="SlideMaster" type="HSlider" parent="MenuPausa" unique_id=976518718]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -210.0
+offset_right = -82.666504
+offset_bottom = -156.66663
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+focus_neighbor_top = NodePath("../Continuar")
+focus_neighbor_bottom = NodePath("../SlideMusic")
+value = 100.0
 
 [node name="PorcentajeMusic" type="Label" parent="MenuPausa" unique_id=2068024379]
 layout_mode = 1
@@ -291,9 +450,9 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = 768.0
-offset_top = -163.0
-offset_right = -782.0
-offset_bottom = -103.0
+offset_top = -82.0
+offset_right = -768.0
+offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_2jm3i")
@@ -310,13 +469,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -256.0
-offset_top = -156.0
+offset_top = -82.0
 offset_right = -82.666504
-offset_bottom = -102.666626
+offset_bottom = -28.666626
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
-focus_neighbor_top = NodePath("../Continuar")
+focus_neighbor_top = NodePath("../SlideMaster")
 focus_neighbor_bottom = NodePath("../SlideMusicEfects")
 value = 100.0
 
@@ -326,10 +485,10 @@ anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 768.0
-offset_top = -28.0
-offset_right = -782.0
-offset_bottom = 32.0
+offset_left = 767.0
+offset_top = 46.0
+offset_right = -768.0
+offset_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_2jm3i")
@@ -346,9 +505,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -256.0
-offset_top = -20.0
+offset_top = 46.0
 offset_right = -82.666504
-offset_bottom = 33.333374
+offset_bottom = 99.333374
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
@@ -357,17 +516,14 @@ focus_neighbor_bottom = NodePath("../Continuar")
 value = 100.0
 
 [node name="ContinuarTouch" type="TouchScreenButton" parent="MenuPausa" unique_id=993571794]
-position = Vector2(962, 748)
+position = Vector2(962, 822)
 shape = SubResource("RectangleShape2D_go0ap")
-
-[node name="StartTouch" type="TouchScreenButton" parent="." unique_id=910109025]
-position = Vector2(960, 907)
-shape = SubResource("RectangleShape2D_mq0y1")
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_touch_pressed"]
+[connection signal="pressed" from="StartTouch" to="." method="_on_start_touch_pressed"]
 [connection signal="pressed" from="MenuPausa/Continuar" to="." method="_on_continuar_touch_pressed"]
+[connection signal="value_changed" from="MenuPausa/SlideMaster" to="." method="_VolumenMaster"]
 [connection signal="value_changed" from="MenuPausa/SlideMusic" to="." method="_VolumenMusica"]
 [connection signal="value_changed" from="MenuPausa/SlideMusicEfects" to="." method="_VolumenEfectos"]
 [connection signal="pressed" from="MenuPausa/ContinuarTouch" to="." method="_on_continuar_touch_pressed"]
-[connection signal="pressed" from="StartTouch" to="." method="_on_start_touch_pressed"]
